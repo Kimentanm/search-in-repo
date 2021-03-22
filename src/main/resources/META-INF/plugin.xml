@@ -1,0 +1,44 @@
+<idea-plugin>
+    <id>com.kimen.plugin</id>
+    <name>Search In Maven Repository</name>
+    <vendor email="Kimentanm@gmail.com" url="http://github.com/Kimentanm">Kimen</vendor>
+
+    <description><![CDATA[
+    <p>Maven Repository plugin</p><br>
+    <p>该插件提供一个查询工具方便在IDEA中直接搜索Maven和Gradle的依赖信息</p>
+    <ul>
+            <li>
+            1.双击Artifact列表的某一行查询Artifact所有版本
+            </li>
+            <li>
+            2.双击Artifact列表的某一版本查询该版本的详情
+            </li>
+            <li>
+            3.直接复制或者点击按钮复制依赖信息
+            </li>
+    </ul>
+    <br>
+    <p>插件源码：<a href="https://github.com/Kimentanm/search-in-mvn-repo">Github</a></p>
+    ]]></description>
+    <change-notes>
+        <![CDATA[
+        <ul>
+            <li>v1.0.0 <br>
+                发布的第一个版本，基础功能均已完成<br>
+                输入ArtifactId关键字，选择版本即可查询到相关依赖信息
+            </li>
+        </ul>
+        ]]>
+    </change-notes>
+
+    <depends>com.intellij.modules.platform</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <!-- Add your extensions here -->
+        <toolWindow anchor="right" id="Search" icon="/maven.png" factoryClass="view.MainWindow"/>
+    </extensions>
+
+    <actions>
+        <!-- Add your actions here -->
+    </actions>
+</idea-plugin>
