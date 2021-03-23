@@ -5,16 +5,18 @@
 
 Jetbrains插件，支持Jetbrains全系产品。一款依赖查询工具，输入artifactId关键词，选择版本即可获得相应的依赖信息。
 
-> 当前仅支持Maven和Gradle两种依赖
+> 当前暂时仅支持Maven和Gradle两种依赖
 
 ## 安装  
 ### 从Intellij Plugin仓库下载
-在Plugin repository中搜索Search in Maven repository
+在Plugin repository中搜索Search in Maven repository  
+[Plugin HomePage](https://plugins.jetbrains.com/plugin/16373-search-in-maven-repository)
 
 ### 源码编译
 - 使用Gradle的`buildPlugin`脚本构建  
 - 项目根路径找到build/distributions/searchin-mvn-repo-x.x.x.zip文件  
 - IDE中选择`Install plugin from disk`，选择上述zip文件
+- [下载zip文件](http://upload.kimen.com.cn/#/s/vmIj)
 
 ## 使用
  - 插件安装好，在IDE的右侧菜单栏会出现一个`Search`菜单  
@@ -27,7 +29,7 @@ Jetbrains插件，支持Jetbrains全系产品。一款依赖查询工具，输�
  ![](https://cdn.jsdelivr.net/gh/kimentanm/image-store/img/20210322214646.png)
 
 ## 预览
-![](https://cdn.jsdelivr.net/gh/kimentanm/image-store/img/20210322215045.png)
+![](https://cdn.jsdelivr.net/gh/kimentanm/image-store/img/20210322230202.png)
 
 ## Change Notes
 - v1.0.0   

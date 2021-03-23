@@ -33,7 +33,6 @@ public class DetailDialog extends JDialog {
     }
 
     public void setData(ArtifactDetail detail) {
-        Alarm alarm = AlarmFactory.getInstance().create();
         artifactId.setCopyable(true);
         artifactId.setText(detail.getArtifactId());
         versionContent.setText(detail.getVersion());

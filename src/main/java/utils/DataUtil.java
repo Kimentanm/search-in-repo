@@ -40,7 +40,7 @@ public class DataUtil {
                     DependenceGroupItem groupItem = new DependenceGroupItem();
                     groupItem.setArtifactLabel(artifactTitle.text());
                     groupItem.setGroupLabel(groupId.text());
-                    groupItem.setUsagesLabel(usage.text().split(" ")[0]);
+                    groupItem.setUsagesLabel(usage == null ? "0" : usage.text().split(" ")[0]);
                     groupItem.setArtifactId(artifactId.text());
                     list.add(groupItem);
                 });
