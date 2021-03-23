@@ -19,10 +19,10 @@ public class DataUtil {
 
     private final static String BASE_URL = "https://mf-edu.kimen.com.cn/transmit/mvnrepository";
 
-    public static void searchGroupList(String value, String currentPage, Callback<GroupResult> callback) {
+    public static void searchGroupList(String value, String currentPage, String sortText, Callback<GroupResult> callback) {
         ApplicationManager.getApplication().executeOnPooledThread(() -> {
             try {
-                String result = OkHttpUtil.sendGet(BASE_URL + "/search?q=" + value + "&p=" + currentPage);
+                String result = OkHttpUtil.sendGet(BASE_URL + "/search?q=" + value + "&p=" + currentPage + "&sort=" + sortText);
                 Document document = Jsoup.parse(result);
                 // 获取分页信息
                 String totalPage = document.getElementById("maincontent").child(0).child(0).text();

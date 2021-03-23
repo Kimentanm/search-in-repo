@@ -36,10 +36,13 @@ public class MainWindow implements ToolWindowFactory {
     private JButton nextButton;
     private JLabel currentPage;
     private JLabel totalPage;
+    private JComboBox sortSelect;
     private Project project;
     private GroupTableModel groupTableModel;
     private ArtifactTableModel artifactTableModel;
     private DetailDialog detailDialog;
+
+    private final String[] sortLabel = { "relevance", "popular", "newest"};
 
     /**
      * 防止多次点击按钮
@@ -142,6 +145,8 @@ public class MainWindow implements ToolWindowFactory {
 
     @Override
     public void init(@NotNull ToolWindow toolWindow) {
+        DefaultComboBoxModel model = new DefaultComboBoxModel(sortLabel);
+        sortSelect.setModel(model);
         detailDialog = new DetailDialog();
         currentPage.setText("1");
         totalPage.setText("1");
@@ -179,9 +184,10 @@ public class MainWindow implements ToolWindowFactory {
     private void searchGroupList(GroupTableModel groupTableModel, ArtifactTableModel artifactTableModel) {
         String text = searchText.getText();
         String currentPageText = currentPage.getText();
+        String sortText = sortLabel[sortSelect.getSelectedIndex()];
         groupTableLoading = true;
         groupTable.setPaintBusy(true);
-        DataUtil.searchGroupList(text, currentPageText, new Callback<GroupResult>() {
+        DataUtil.searchGroupList(text, currentPageText, sortText, new Callback<GroupResult>() {
 
             @Override
             public void onSuccess(GroupResult result) {
