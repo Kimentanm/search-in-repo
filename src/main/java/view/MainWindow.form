@@ -124,7 +124,7 @@
                       <forms/>
                     </constraints>
                     <properties>
-                      <text value="100"/>
+                      <text value="1"/>
                     </properties>
                   </component>
                 </children>

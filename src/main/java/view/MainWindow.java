@@ -4,13 +4,17 @@ import bean.ArtifactDetail;
 import bean.ArtifactItem;
 import bean.DependenceGroupItem;
 import bean.GroupResult;
+import com.intellij.execution.ui.BaseContentCloseListener;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.wm.ToolWindow;
 import com.intellij.openapi.wm.ToolWindowFactory;
 import com.intellij.ui.DoubleClickListener;
 import com.intellij.ui.components.JBTextField;
 import com.intellij.ui.content.Content;
 import com.intellij.ui.content.ContentFactory;
+import com.intellij.ui.content.ContentManager;
+import com.intellij.ui.content.ContentManagerListener;
 import com.intellij.ui.table.JBTable;
 import core.Callback;
 import model.ArtifactTableModel;
@@ -45,6 +49,8 @@ public class MainWindow implements ToolWindowFactory {
 
     private final String[] sortLabel = { "relevance", "popular", "newest"};
 
+    private String currentSearchText;
+
     /**
      * 防止多次点击按钮
      */
@@ -55,12 +61,48 @@ public class MainWindow implements ToolWindowFactory {
     public void createToolWindowContent(@NotNull Project project, @NotNull ToolWindow toolWindow) {
         this.project = project;
         ContentFactory contentFactory = ContentFactory.SERVICE.getInstance();
-        Content content = contentFactory.createContent(mainPanel, "", false);
+        Content content = contentFactory.createContent(mainPanel, "MAVEN", false);
         toolWindow.getContentManager().addContent(content);
         // 双击获取ArtifactList
         handleDbClickGroupList();
         // 双击获取ArtifactDetail
         handleDbClickArtifactList();
+    }
+
+    @Override
+    public void init(@NotNull ToolWindow toolWindow) {
+        DefaultComboBoxModel model = new DefaultComboBoxModel(sortLabel);
+        sortSelect.setModel(model);
+        detailDialog = new DetailDialog();
+        groupTableModel = new GroupTableModel(groupTable);
+        artifactTableModel = new ArtifactTableModel(artifactTable);
+        TableRowSorter<TableModel> sorter1 = new TableRowSorter<TableModel>(groupTableModel);
+        TableRowSorter<TableModel> sorter2 = new TableRowSorter<TableModel>(artifactTableModel);
+        groupTable.setRowSorter(sorter1);
+        artifactTable.setRowSorter(sorter2);
+        searchText.addActionListener(e -> handleSearch());
+        searchButton.addActionListener(e -> handleSearch());
+        // 上一页
+        prevButton.addActionListener(e -> {
+            if (!groupTableLoading) {
+                int currentPageValue = Integer.parseInt(currentPage.getText());
+                if (currentPageValue > 1) {
+                    currentPage.setText(--currentPageValue + "");
+                    searchGroupList(groupTableModel, artifactTableModel);
+                }
+            }
+        });
+        // 下一页
+        nextButton.addActionListener(e -> {
+            if (!groupTableLoading) {
+                int totalPageValue = Integer.parseInt(totalPage.getText());
+                int currentPageValue = Integer.parseInt(currentPage.getText());
+                if (currentPageValue < totalPageValue) {
+                    currentPage.setText(++currentPageValue + "");
+                    searchGroupList(groupTableModel, artifactTableModel);
+                }
+            }
+        });
     }
 
     private void handleDbClickArtifactList() {
@@ -144,79 +186,49 @@ public class MainWindow implements ToolWindowFactory {
         }).installOn(groupTable);
     }
 
-    @Override
-    public void init(@NotNull ToolWindow toolWindow) {
-        DefaultComboBoxModel model = new DefaultComboBoxModel(sortLabel);
-        sortSelect.setModel(model);
-        detailDialog = new DetailDialog();
+    private void handleSearch() {
         currentPage.setText("1");
         totalPage.setText("1");
-        groupTableModel = new GroupTableModel(groupTable);
-        artifactTableModel = new ArtifactTableModel(artifactTable);
-        TableRowSorter<TableModel> sorter1 = new TableRowSorter<TableModel>(groupTableModel);
-        TableRowSorter<TableModel> sorter2 = new TableRowSorter<TableModel>(artifactTableModel);
-        groupTable.setRowSorter(sorter1);
-        artifactTable.setRowSorter(sorter2);
-        searchText.addActionListener(e -> searchGroupList(groupTableModel, artifactTableModel));
-        searchButton.addActionListener(e -> searchGroupList(groupTableModel, artifactTableModel));
-        // 上一页
-        prevButton.addActionListener(e -> {
-            if (!groupTableLoading) {
-                int currentPageValue = Integer.parseInt(currentPage.getText());
-                if (currentPageValue > 1) {
-                    currentPage.setText(--currentPageValue + "");
-                    searchGroupList(groupTableModel, artifactTableModel);
-                }
-            }
-        });
-        // 下一页
-        nextButton.addActionListener(e -> {
-            if (!groupTableLoading) {
-                int totalPageValue = Integer.parseInt(totalPage.getText());
-                int currentPageValue = Integer.parseInt(currentPage.getText());
-                if (currentPageValue < totalPageValue) {
-                    currentPage.setText(++currentPageValue + "");
-                    searchGroupList(groupTableModel, artifactTableModel);
-                }
-            }
-        });
+        currentSearchText = searchText.getText();
+        searchGroupList(groupTableModel, artifactTableModel);
     }
 
     private void searchGroupList(GroupTableModel groupTableModel, ArtifactTableModel artifactTableModel) {
-        String text = searchText.getText();
-        String currentPageText = currentPage.getText();
-        String sortText = sortLabel[sortSelect.getSelectedIndex()];
-        groupTableLoading = true;
-        groupTable.setPaintBusy(true);
-        DataUtil.searchGroupList(text, currentPageText, sortText, new Callback<GroupResult>() {
+        if (!StringUtil.isEmpty(currentSearchText)) {
+            String currentPageText = currentPage.getText();
+            String sortText = sortLabel[sortSelect.getSelectedIndex()];
+            groupTableLoading = true;
+            groupTable.setPaintBusy(true);
+            DataUtil.searchGroupList(currentSearchText, currentPageText, sortText, new Callback<GroupResult>() {
 
-            @Override
-            public void onSuccess(GroupResult result) {
-                List<DependenceGroupItem> list = result.getData();
-                int totalPageValue = result.getTotalPage();
-                totalPage.setText((int)Math.ceil(totalPageValue / 10) + 1 + "");
-                groupTableModel.getDataVector().removeAllElements();
-                artifactTableModel.getDataVector().removeAllElements();
-                groupTableModel.setupTable(list);
-                groupTableLoading = false;
-                groupTable.setPaintBusy(false);
-            }
+                @Override
+                public void onSuccess(GroupResult result) {
+                    List<DependenceGroupItem> list = result.getData();
+                    int totalPageValue = result.getTotalPage();
+                    totalPage.setText((int)Math.ceil(totalPageValue / 10) + 1 + "");
+                    groupTableModel.getDataVector().removeAllElements();
+                    artifactTableModel.getDataVector().removeAllElements();
+                    groupTableModel.setupTable(list);
+                    groupTableLoading = false;
+                    groupTable.setPaintBusy(false);
+                }
 
-            @Override
-            public void onFailure(String msg) {
+                @Override
+                public void onFailure(String msg) {
 
-            }
+                }
 
-            @Override
-            public void onError() {
+                @Override
+                public void onError() {
 
-            }
+                }
 
-            @Override
-            public void onComplete() {
+                @Override
+                public void onComplete() {
 
-            }
-        });
+                }
+            });
+        }
     }
 
     @Override
