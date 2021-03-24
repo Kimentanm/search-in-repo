@@ -15,7 +15,9 @@ import java.util.Vector;
 
 public class ArtifactTableModel extends DefaultTableModel {
 
-    private String[] columnNames = {"Index", "Version", "Repository", "Usages", "Date"};
+    private final String[] columnNames = {"Index", "Version", "Repository", "Usages", "Date"};
+
+    private final Class<?>[] types = { Integer.class, String.class, String.class, Integer.class, String.class };
 
     private JTable table;
 
@@ -31,7 +33,7 @@ public class ArtifactTableModel extends DefaultTableModel {
         JTableHeader tableHeader = table.getTableHeader();
         tableHeader.setFont(new Font(null, Font.BOLD, 12));
         TableColumnModel columnModel = table.getColumnModel();
-        columnModel.getColumn(0).setPreferredWidth(50);
+        columnModel.getColumn(0).setPreferredWidth(80);
         for (int i = 1; i < columnNames.length; i++) {
             columnModel.getColumn(i).setPreferredWidth(125);
         }
@@ -118,5 +120,10 @@ public class ArtifactTableModel extends DefaultTableModel {
 
     public List<ArtifactItem> getData() {
         return data;
+    }
+
+    @Override
+    public Class<?> getColumnClass(int columnIndex) {
+        return types[columnIndex];
     }
 }

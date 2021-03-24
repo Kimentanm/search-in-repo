@@ -6,6 +6,7 @@ import bean.DependenceGroupItem;
 import bean.GroupResult;
 import com.intellij.openapi.application.ApplicationManager;
 import core.Callback;
+import org.apache.commons.lang3.StringUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -14,6 +15,8 @@ import org.jsoup.select.Elements;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class DataUtil {
 
@@ -146,5 +149,17 @@ public class DataUtil {
             }
         }
         return sb.toString();
+    }
+
+    public static Integer parseInt(String content) {
+        Matcher matcher = null;
+        if (StringUtils.isBlank(content)) {
+            return 0;
+        }
+        matcher = Pattern.compile("[0-9.]+").matcher(content.replaceAll(",", ""));
+        while (matcher.find()) {
+            return Integer.parseInt(matcher.group());
+        }
+        return 0;
     }
 }

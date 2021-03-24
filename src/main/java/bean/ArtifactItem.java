@@ -1,5 +1,7 @@
 package bean;
 
+import utils.DataUtil;
+
 public class ArtifactItem {
 
     private String version;
@@ -60,14 +62,14 @@ public class ArtifactItem {
         this.artifactId = artifactId;
     }
 
-    public String getValueByColumn(String columnName) {
+    public Object getValueByColumn(String columnName) {
         switch (columnName) {
             case "Version":
                 return getVersion();
             case "Repository":
                 return getRepository();
             case "Usages":
-                return getUsages();
+                return DataUtil.parseInt(getUsages());
             case "Date":
                 return getDate();
             default:

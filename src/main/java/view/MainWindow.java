@@ -23,6 +23,7 @@ import javax.swing.*;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 import java.awt.event.MouseEvent;
+import java.util.Comparator;
 import java.util.List;
 
 public class MainWindow implements ToolWindowFactory {
