@@ -5,19 +5,36 @@
 
     <description><![CDATA[
     <p>Repository helper plugin</p><br>
+
+    <p>The plugin provides a query tool to search Maven and NPM dependencies info in the IDE</p>
+    <p>Tool for NPM is coming soon……</p>
+    <br>
+    <b>Maven:</b>
+    <ul>
+            <li>
+            Double-click a row in the Artifact list to query all versions of the Artifact
+            </li>
+            <li>
+            Double-click a version of the Artifact list to query the details of that version
+            </li>
+            <li>
+            Copy the dependency information or click the button
+            </li>
+    </ul>
+
     <p>该插件提供一个查询工具方便在IDE中直接搜索Maven和NPM的依赖信息</p>
     <p>NPM依赖信息查询功能正在骑马来的路上……</p>
     <br>
     <b>Maven:</b>
     <ul>
             <li>
-            1.双击Artifact列表的某一行查询Artifact所有版本
+            双击Artifact列表的某一行查询Artifact所有版本
             </li>
             <li>
-            2.双击Artifact列表的某一版本查询该版本的详情
+            双击Artifact列表的某一版本查询该版本的详情
             </li>
             <li>
-            3.直接复制或者点击按钮复制依赖信息
+            直接复制或者点击按钮复制依赖信息
             </li>
     </ul>
     <br>
@@ -27,14 +44,16 @@
     <change-notes>
         <![CDATA[
         <ul>
+            <li>v1.1.1 <br>
+                Update the English introduction of plugin
             <li>v1.1.0 <br>
-                新增排序条件relevance|popular|newest
-                解决排序失效的bug
-                解决分页错误的bug
+                Added sort condition: relevance | popular | newest<br>
+                Fix the bug of sort<br>
+                Fix the bug of paging
             </li>
             <li>v1.0.0 <br>
-                发布的第一个版本，基础功能均已完成<br>
-                输入ArtifactId关键字，选择版本即可查询到相关依赖信息
+                Release the first version, the basic features have been completed<br>
+                Enter the keyword and select the version to query the dependency information
             </li>
         </ul>
         ]]>
