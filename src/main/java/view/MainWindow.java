@@ -235,9 +235,4 @@ public class MainWindow implements ToolWindowFactory {
     public boolean shouldBeAvailable(@NotNull Project project) {
         return true;
     }
-
-    @Override
-    public boolean isDoNotActivateOnStart() {
-        return true;
-    }
 }

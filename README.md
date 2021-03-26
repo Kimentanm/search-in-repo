@@ -14,14 +14,15 @@ Jetbrains插件，支持Jetbrains全系IDE。一款依赖查询工具，输入�
 
 ## 安装  
 #### 从Intellij Plugin仓库下载
-在Plugin repository中搜索Search in repository  
+在Plugin repository中搜索Search in Repository  
 [Plugin HomePage](https://plugins.jetbrains.com/plugin/16373-search-in-maven-repository)
+![](https://gitee.com/Kimentanm/image-store/raw/master/img/20210326090134.png)
 
 #### 源码编译
 - 使用Gradle的`buildPlugin`脚本构建  
 - 项目根路径找到build/distributions/search-in-repo-x.x.x.zip文件  
 - IDE中选择`Install plugin from disk`，选择上述zip文件
-- [下载zip文件](http://upload.kimen.com.cn/#/s/wRSz)
+- [下载zip文件](http://upload.kimen.com.cn/#/s/x9T4)
 
 ## 使用
  - 插件安装好，在IDE的右侧菜单栏会出现一个`Search`菜单  
@@ -37,6 +38,10 @@ Jetbrains插件，支持Jetbrains全系IDE。一款依赖查询工具，输入�
 ![](https://cdn.jsdelivr.net/gh/kimentanm/image-store/img/20210322230202.png)
 
 ## Change Notes
+- v1.1.1  
+  发布插件到Jetbrains插件仓库  
+  增加插件英文介绍  
+  解决插件适配性问题
 - v1.1.0  
   新增排序条件 `relevance | popular | newest`  
   解决排序失效的bug  

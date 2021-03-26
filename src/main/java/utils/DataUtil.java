@@ -6,7 +6,7 @@ import bean.DependenceGroupItem;
 import bean.GroupResult;
 import com.intellij.openapi.application.ApplicationManager;
 import core.Callback;
-import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang.StringUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -20,7 +20,7 @@ import java.util.regex.Pattern;
 
 public class DataUtil {
 
-    private final static String BASE_URL = "https://mf-edu.kimen.com.cn/transmit/mvnrepository";
+    private final static String BASE_URL = "https://mvn-forward.vercel.app/mvnrepository";
 
     public static void searchGroupList(String value, String currentPage, String sortText, Callback<GroupResult> callback) {
         ApplicationManager.getApplication().executeOnPooledThread(() -> {

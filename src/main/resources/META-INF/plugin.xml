@@ -45,7 +45,9 @@
         <![CDATA[
         <ul>
             <li>v1.1.1 <br>
-                Update the English introduction of plugin
+                Update the English introduction of plugin<br>
+                Fix the compatibility
+            </li>
             <li>v1.1.0 <br>
                 Added sort condition: relevance | popular | newest<br>
                 Fix the bug of sort<br>

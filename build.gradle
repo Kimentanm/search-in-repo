@@ -20,13 +20,13 @@ dependencies {
 
 // See https://github.com/JetBrains/gradle-intellij-plugin/
 intellij {
-    version '2020.1.3'
+    version '2019.2.4'
     intellij.updateSinceUntilBuild true
     intellij.sameSinceUntilBuild false
 }
 patchPluginXml {
-    sinceBuild '173.*'
-    untilBuild '203.*'
+    sinceBuild '191.*'
+    untilBuild '211.*'
 }
 
 tasks.withType(JavaCompile) {

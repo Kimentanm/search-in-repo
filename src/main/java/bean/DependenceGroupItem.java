@@ -1,11 +1,8 @@
 package bean;
 
-import org.apache.commons.lang3.StringUtils;
 import utils.DataUtil;
 
 import javax.swing.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class DependenceGroupItem {
 

@@ -33,7 +33,9 @@
             <children>
               <component id="6c1a5" class="com.intellij.ui.table.JBTable" binding="artifactTable">
                 <constraints/>
-                <properties/>
+                <properties>
+                  <visibleRowCount value="0"/>
+                </properties>
               </component>
             </children>
           </scrollpane>
@@ -59,7 +61,7 @@
                   <component id="7d5bc" class="com.intellij.ui.table.JBTable" binding="groupTable">
                     <constraints/>
                     <properties>
-                      <visibleRowCount value="10"/>
+                      <visibleRowCount value="0"/>
                     </properties>
                   </component>
                 </children>
