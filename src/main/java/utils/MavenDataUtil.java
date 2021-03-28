@@ -18,9 +18,9 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class DataUtil {
+public class MavenDataUtil {
 
-    private final static String BASE_URL = "https://mvn-forward.vercel.app/mvnrepository";
+    private final static String BASE_URL = "https://mf-edu.kimen.com.cn/transmit/mvnrepository";
 
     public static void searchGroupList(String value, String currentPage, String sortText, Callback<GroupResult> callback) {
         ApplicationManager.getApplication().executeOnPooledThread(() -> {

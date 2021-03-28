@@ -5,12 +5,16 @@ import okhttp3.*;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 public class OkHttpUtil {
 
     public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
 
-    private static OkHttpClient client = new OkHttpClient();
+    private static OkHttpClient client = new OkHttpClient.Builder()
+            .connectTimeout(1, TimeUnit.MINUTES)
+            .readTimeout(1,TimeUnit.MINUTES)
+            .build();
 
     public static String sendPost(String url, String json) throws IOException {
         return OkHttpUtil.sendPost(url,json,new HashMap<String, String>());

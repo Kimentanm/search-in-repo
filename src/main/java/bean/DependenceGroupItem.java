@@ -1,6 +1,6 @@
 package bean;
 
-import utils.DataUtil;
+import utils.MavenDataUtil;
 
 import javax.swing.*;
 
@@ -59,7 +59,7 @@ public class DependenceGroupItem {
             case "Artifact ID":
                 return getArtifactLabel();
             case "Usages":
-                return DataUtil.parseInt(getUsagesLabel());
+                return MavenDataUtil.parseInt(getUsagesLabel());
             default:
                 return "";
         }

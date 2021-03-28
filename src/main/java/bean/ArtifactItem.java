@@ -1,6 +1,6 @@
 package bean;
 
-import utils.DataUtil;
+import utils.MavenDataUtil;
 
 public class ArtifactItem {
 
@@ -69,7 +69,7 @@ public class ArtifactItem {
             case "Repository":
                 return getRepository();
             case "Usages":
-                return DataUtil.parseInt(getUsages());
+                return MavenDataUtil.parseInt(getUsages());
             case "Date":
                 return getDate();
             default:
