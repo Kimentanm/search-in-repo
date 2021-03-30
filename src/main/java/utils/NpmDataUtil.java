@@ -57,20 +57,23 @@ public class NpmDataUtil {
             try {
                 String result = OkHttpUtil.sendGet(BASE_URL + "/package/" + packageItem.getPackageName() + "?activeTab=versions");
                 Document document = Jsoup.parse(result);
-                Element versionElement = document.getElementById("tabpanel-versions").child(0).child(4);
+                Element child = document.getElementById("tabpanel-versions").child(0);
+                Element versionElement = child.child(child.childNodeSize() - 1);
                 Elements versionList = versionElement.children();
                 List<VersionItem> list = new ArrayList<>();
                 for (int i = 1; i < versionList.size(); i++) {
                     Element versionItem = versionList.get(i);
                     Elements a = versionItem.getElementsByTag("a");
-                    String version = versionItem.getElementsByTag("a").get(0).text();
-                    String downloads = versionItem.getElementsByTag("code").get(0).text();
-                    String published = versionItem.getElementsByTag("ul").get(0).text();
-                    VersionItem item = new VersionItem();
-                    item.setVersion(version);
-                    item.setDownloads(Integer.parseInt(downloads));
-                    item.setPublished(published);
-                    list.add(item);
+                    if (a.size() > 0) {
+                        String version = versionItem.getElementsByTag("a").get(0).text();
+                        String downloads = versionItem.getElementsByTag("code").get(0).text();
+                        String published = versionItem.getElementsByTag("ul").get(0).text();
+                        VersionItem item = new VersionItem();
+                        item.setVersion(version);
+                        item.setDownloads(Integer.parseInt(downloads));
+                        item.setPublished(published);
+                        list.add(item);
+                    }
                 }
                 callback.onSuccess(list);
             } catch (Exception e) {

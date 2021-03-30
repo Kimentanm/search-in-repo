@@ -6,24 +6,32 @@
     <description><![CDATA[
     <p>Repository helper plugin</p><br>
 
-    <p>The plugin provides a query tool to search Maven and NPM dependencies info in the IDE</p>
-    <p>Tool for NPM is coming soon……</p>
+    <p>The plugin provides a query tool to search Maven or NPM dependencies info in the IDE</p>
     <br>
     <b>Maven:</b>
     <ul>
             <li>
-            Double-click a row in the Artifact list to query all versions of the Artifact
+            Double-click a row of the artifact list to query all versions of the artifact
             </li>
             <li>
-            Double-click a version of the Artifact list to query the details of that version
+            Double-click a version of the artifact list to query the details of that version
             </li>
             <li>
             Copy the dependency information or click the button
             </li>
     </ul>
+    <br>
+    <b>NPM:</b>
+    <ul>
+            <li>
+            Get a list of related packages by searching keywords
+            </li>
+            <li>
+            Double-click a row of the package list to query all versions of the package
+            </li>
+    </ul>
 
     <p>该插件提供一个查询工具方便在IDE中直接搜索Maven和NPM的依赖信息</p>
-    <p>NPM依赖信息查询功能正在骑马来的路上……</p>
     <br>
     <b>Maven:</b>
     <ul>
@@ -38,12 +46,25 @@
             </li>
     </ul>
     <br>
+    <b>NPM:</b>
+    <ul>
+            <li>
+            搜索关键词，获取相关Package列表
+            </li>
+            <li>
+            双击Package列表的某一项查询该Package的所有版本信息
+            </li>
+    </ul>
+    <br>
     <p>Source Code：<a href="https://github.com/Kimentanm/search-in-repo">Github</a> | <a href="https://github.com/Kimentanm/search-in-repo/issues">Issues</a></p>
     <br>
     ]]></description>
     <change-notes>
         <![CDATA[
         <ul>
+            <li>v1.2.0 <br>
+                Add function of querying NPM dependencies info
+            </li>
             <li>v1.1.1 <br>
                 Update the English introduction of plugin<br>
                 Fix the compatibility
