@@ -62,6 +62,10 @@
     <change-notes>
         <![CDATA[
         <ul>
+            <li>v1.2.1 <br>
+                Add error message<br>
+                Fix bugs
+            </li>
             <li>v1.2.0 <br>
                 Add function of querying NPM dependencies info
             </li>

@@ -9,6 +9,7 @@ import com.intellij.ui.table.JBTable;
 import core.Callback;
 import model.PackageTableModel;
 import model.VersionTableModel;
+import utils.NotificationUtils;
 import utils.NpmDataUtil;
 
 import javax.swing.*;
@@ -95,8 +96,8 @@ public class NpmWindow {
                         }
 
                         @Override
-                        public void onError() {
-
+                        public void onError(String msg) {
+                            NotificationUtils.errorNotify(msg, project);
                         }
 
                         @Override
@@ -143,8 +144,8 @@ public class NpmWindow {
                 }
 
                 @Override
-                public void onError() {
-
+                public void onError(String msg) {
+                    NotificationUtils.errorNotify(msg, project);
                 }
 
                 @Override

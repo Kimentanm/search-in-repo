@@ -56,8 +56,10 @@ public class DependenceGroupItem {
         switch (columnName) {
             case "Group ID":
                 return getGroupLabel();
-            case "Artifact ID":
+            case "Artifact Title" :
                 return getArtifactLabel();
+            case "Artifact ID":
+                return getArtifactId();
             case "Usages":
                 return MavenDataUtil.parseInt(getUsagesLabel());
             default:

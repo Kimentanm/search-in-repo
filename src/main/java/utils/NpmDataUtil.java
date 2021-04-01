@@ -18,6 +18,8 @@ public class NpmDataUtil {
 
     private final static String BASE_URL = "https://www.npmjs.com";
 
+    private final static String ERROR_MSG = "Some errors occurred in the search, please submit your search content to GitHub Issue and we will fix it soon.";
+
     public static void searchPackageList(String value, String currentPage, String sortText, Callback<PackageResult> callback) {
         ApplicationManager.getApplication().executeOnPooledThread(() -> {
             try {
@@ -44,7 +46,7 @@ public class NpmDataUtil {
                 callback.onSuccess(packageResult);
             } catch (Exception e) {
                 e.printStackTrace();
-                callback.onError();
+                callback.onError(ERROR_MSG);
             } finally {
                 callback.onComplete();
             }
@@ -78,7 +80,7 @@ public class NpmDataUtil {
                 callback.onSuccess(list);
             } catch (Exception e) {
                 e.printStackTrace();
-                callback.onError();
+                callback.onError(ERROR_MSG);
             } finally {
                 callback.onComplete();
             }

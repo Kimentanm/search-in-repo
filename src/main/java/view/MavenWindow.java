@@ -108,12 +108,12 @@ public class MavenWindow {
 
                         @Override
                         public void onFailure(String msg) {
-
+                            NotificationUtils.errorNotify(msg, project);
                         }
 
                         @Override
-                        public void onError() {
-
+                        public void onError(String msg) {
+                            NotificationUtils.errorNotify(msg, project);
                         }
 
                         @Override
@@ -150,8 +150,8 @@ public class MavenWindow {
                         }
 
                         @Override
-                        public void onError() {
-
+                        public void onError(String msg) {
+                            NotificationUtils.errorNotify(msg, project);
                         }
 
                         @Override
@@ -167,10 +167,12 @@ public class MavenWindow {
     }
 
     private void handleSearch() {
-        currentPage.setText("1");
-        totalPage.setText("1");
-        currentSearchText = searchText.getText();
-        searchGroupList(groupTableModel, artifactTableModel);
+        if (!groupTableLoading) {
+            currentPage.setText("1");
+            totalPage.setText("1");
+            currentSearchText = searchText.getText();
+            searchGroupList(groupTableModel, artifactTableModel);
+        }
     }
 
     private void searchGroupList(GroupTableModel groupTableModel, ArtifactTableModel artifactTableModel) {
@@ -197,8 +199,8 @@ public class MavenWindow {
                 }
 
                 @Override
-                public void onError() {
-
+                public void onError(String msg) {
+                    NotificationUtils.errorNotify(msg, project);
                 }
 
                 @Override

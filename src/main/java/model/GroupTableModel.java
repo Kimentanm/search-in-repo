@@ -15,9 +15,9 @@ import java.util.Vector;
 
 public class GroupTableModel extends DefaultTableModel {
 
-    private final String[] columnNames = { "Index", "Artifact ID", "Group ID", "Usages" };
+    private final String[] columnNames = { "Index", "Artifact Title", "Artifact ID", "Group ID", "Usages" };
 
-    private final Class<?>[] types = { Integer.class, String.class, String.class, Integer.class };
+    private final Class<?>[] types = { Integer.class, String.class, String.class, String.class, Integer.class };
 
     private JTable table;
 
@@ -34,6 +34,7 @@ public class GroupTableModel extends DefaultTableModel {
         tableHeader.setFont(new Font(null, Font.BOLD, 12));
         TableColumnModel columnModel = table.getColumnModel();
         columnModel.getColumn(0).setPreferredWidth(80);
+        columnModel.getColumn(1).setPreferredWidth(200);
         columnModel.getColumn(1).setPreferredWidth(200);
         columnModel.getColumn(2).setPreferredWidth(200);
         columnModel.getColumn(3).setPreferredWidth(100);

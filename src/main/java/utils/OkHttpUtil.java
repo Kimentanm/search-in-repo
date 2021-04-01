@@ -1,5 +1,6 @@
 package utils;
 
+import com.intellij.openapi.application.ex.ApplicationInfoEx;
 import okhttp3.*;
 
 import java.io.IOException;
@@ -21,7 +22,10 @@ public class OkHttpUtil {
     }
 
     public static String sendGet(String url) throws IOException {
-        return OkHttpUtil.sendGet(url,new HashMap<String, String>());
+        String fullApplicationName = ApplicationInfoEx.getInstanceEx().getFullApplicationName();
+        Map<String, String> headers = new HashMap<>();
+        headers.put("application-name", fullApplicationName);
+        return OkHttpUtil.sendGet(url, headers);
     }
 
     public static String sendPut(String url, String json) throws IOException {
