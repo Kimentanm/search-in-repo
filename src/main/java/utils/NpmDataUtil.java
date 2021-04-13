@@ -74,6 +74,7 @@ public class NpmDataUtil {
                         item.setVersion(version);
                         item.setDownloads(Integer.parseInt(downloads));
                         item.setPublished(published);
+                        item.setPackageName(packageItem.getPackageName());
                         list.add(item);
                     }
                 }

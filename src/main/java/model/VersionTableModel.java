@@ -15,9 +15,9 @@ import java.util.Vector;
 
 public class VersionTableModel extends DefaultTableModel {
 
-    private final String[] columnNames = { "Index", "Version", "Weekly Downloads", "Published" };
+    private final String[] columnNames = { "Index", "Package Name", "Version", "Weekly Downloads", "Published" };
 
-    private final Class<?>[] types = { Integer.class, String.class, Integer.class, String.class };
+    private final Class<?>[] types = { Integer.class, String.class, String.class, Integer.class, String.class };
 
     private JBTable table;
 
@@ -34,9 +34,10 @@ public class VersionTableModel extends DefaultTableModel {
         tableHeader.setFont(new Font(null, Font.BOLD, 12));
         TableColumnModel columnModel = table.getColumnModel();
         columnModel.getColumn(0).setPreferredWidth(80);
-        columnModel.getColumn(1).setPreferredWidth(100);
-        columnModel.getColumn(2).setPreferredWidth(150);
-        columnModel.getColumn(3).setPreferredWidth(100);
+        columnModel.getColumn(1).setPreferredWidth(200);
+        columnModel.getColumn(2).setPreferredWidth(100);
+        columnModel.getColumn(3).setPreferredWidth(150);
+        columnModel.getColumn(4).setPreferredWidth(100);
         DefaultTableCellRenderer renderer =  new DefaultTableCellRenderer();
         renderer.setHorizontalAlignment(JTextField.CENTER);
         table.getColumn("Index").setCellRenderer(renderer);

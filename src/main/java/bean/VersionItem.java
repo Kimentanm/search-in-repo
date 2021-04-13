@@ -5,6 +5,7 @@ public class VersionItem {
     private String version;
     private Integer downloads;
     private String published;
+    private String packageName;
 
     public String getVersion() {
         return version;
@@ -30,6 +31,14 @@ public class VersionItem {
         this.published = published;
     }
 
+    public String getPackageName() {
+        return packageName;
+    }
+
+    public void setPackageName(String packageName) {
+        this.packageName = packageName;
+    }
+
     public Object getValueByColumn(String columnName) {
         switch (columnName) {
             case "Version":
@@ -38,6 +47,8 @@ public class VersionItem {
                 return getDownloads();
             case "Published":
                 return getPublished();
+            case "Package Name":
+                return getPackageName();
             default:
                 return "";
         }
