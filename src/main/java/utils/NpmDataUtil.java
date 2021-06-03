@@ -25,9 +25,10 @@ public class NpmDataUtil {
             try {
                 String result = OkHttpUtil.sendGet(BASE_URL + "/search?q=" + value + "&page=" + currentPage + "&ranking=" + sortText);
                 Document document = Jsoup.parse(result);
-                Elements packageElements = document.getElementsByClass("w-60-l");
+                Elements packageElements = document.getElementsByTag("section");
                 List<PackageItem> list = new ArrayList<>();
-                packageElements.forEach(packageElement -> {
+                packageElements.forEach(item -> {
+                    Element packageElement = item.child(0);
                     String packageName = packageElement.child(0).child(0).text();
                     String description = packageElement.child(2).text();
                     String author = packageElement.child(packageElement.childNodeSize() - 1).child(0).text();
