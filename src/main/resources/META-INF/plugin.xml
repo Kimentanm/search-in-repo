@@ -62,6 +62,10 @@
     <change-notes>
         <![CDATA[
         <ul>
+            <li>v1.2.2 <br>
+                Add Package Name column to NPM<br>
+                Fix bugs
+            </li>
             <li>v1.2.1 <br>
                 Add error message<br>
                 Fix bugs
