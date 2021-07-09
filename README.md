@@ -13,7 +13,7 @@ Jetbrains插件，支持Jetbrains全系IDE。一款依赖查询工具，输入�
 ## 安装  
 #### 从Intellij Plugin仓库下载
 在Plugin repository中搜索Search in Repository  
-[Plugin HomePage](https://plugins.jetbrains.com/plugin/16373-search-in-maven-repository)
+[Plugin HomePage](https://plugins.jetbrains.com/plugin/16427-search-in-repository)
 ![](https://gitee.com/Kimentanm/image-store/raw/master/img/20210326090134.png)
 
 #### 源码编译
