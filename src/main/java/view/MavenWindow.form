@@ -159,7 +159,7 @@
             </children>
           </grid>
           <grid id="dcd4e" layout-manager="FormLayout">
-            <rowspec value="top:d:grow"/>
+            <rowspec value="center:d:grow"/>
             <colspec value="fill:d:grow"/>
             <constraints>
               <splitpane position="right"/>
@@ -167,9 +167,11 @@
             <properties/>
             <border type="none"/>
             <children>
-              <tabbedpane id="65066" class="com.intellij.ui.components.JBTabbedPane" binding="repositoryTab">
+              <tabbedpane id="4ae11" binding="repositoryTab">
                 <constraints>
-                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
+                    <preferred-size width="200" height="200"/>
+                  </grid>
                   <forms/>
                 </constraints>
                 <properties/>
