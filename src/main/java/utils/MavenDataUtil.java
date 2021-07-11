@@ -1,9 +1,6 @@
 package utils;
 
-import bean.ArtifactDetail;
-import bean.ArtifactItem;
-import bean.DependenceGroupItem;
-import bean.GroupResult;
+import bean.*;
 import com.intellij.openapi.application.ApplicationManager;
 import core.Callback;
 import org.apache.commons.lang.StringUtils;
@@ -11,6 +8,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import view.ArtifactTable;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -25,6 +23,37 @@ public class MavenDataUtil {
     private final static String ERROR_MSG = "Some errors occurred in the search, please submit your search content to GitHub Issue and we will fix it soon.";
 
     private final static String FAILURE_MSG = "The server is down. Please try again in 10 minutes";
+
+    public static void searchRepositoryList(DependenceGroupItem groupItem, Callback<List<RepositoryItem>> callback) {
+        String artifactId = groupItem.getArtifactId();
+        String groupId = groupItem.getGroupLabel();
+        ApplicationManager.getApplication().executeOnPooledThread(() -> {
+            try {
+                String result = OkHttpUtil.sendGet(BASE_URL + "/artifact/" + groupId + "/" + artifactId);
+                if (!result.contains("Cloudflare")) {
+                    Document document = Jsoup.parse(result);
+                    Element snippets = document.getElementById("snippets");
+                    Element repositoryTabs = snippets.getElementsByClass("tabs").get(0);
+                    Elements elements = repositoryTabs.getElementsByTag("a");
+                    List<RepositoryItem> repositoryList = new ArrayList<>();
+                    elements.forEach(element -> {
+                        RepositoryItem item = new RepositoryItem();
+                        item.setPath(element.attr("href"));
+                        item.setTitle(element.text());
+                        repositoryList.add(item);
+                    });
+                    callback.onSuccess(repositoryList);
+                } else {
+                    callback.onFailure(FAILURE_MSG);
+                }
+            } catch (Exception e1) {
+                e1.printStackTrace();
+                callback.onError(ERROR_MSG);
+            } finally {
+                callback.onComplete();
+            }
+        });
+    }
 
     public static void searchGroupList(String value, String currentPage, String sortText, Callback<GroupResult> callback) {
         ApplicationManager.getApplication().executeOnPooledThread(() -> {
@@ -69,12 +98,14 @@ public class MavenDataUtil {
         });
     }
 
-    public static void searchArtifactList(DependenceGroupItem groupItem, Callback<List<ArtifactItem>> callback) {
+    public static void searchArtifactList(ArtifactTable artifactTable, Callback<List<ArtifactItem>> callback) {
+        DependenceGroupItem groupItem = artifactTable.getGroupItem();
+        String repositoryPath = artifactTable.getRepositoryPath();
         String artifactId = groupItem.getArtifactId();
         String groupId = groupItem.getGroupLabel();
         ApplicationManager.getApplication().executeOnPooledThread(() -> {
             try {
-                String result = OkHttpUtil.sendGet(BASE_URL + "/artifact/" + groupId + "/" + artifactId);
+                String result = OkHttpUtil.sendGet(BASE_URL + repositoryPath);
                 if (!result.contains("Cloudflare")) {
                     Document document = Jsoup.parse(result);
                     Element versionTable = document.getElementsByClass("grid versions").get(0);

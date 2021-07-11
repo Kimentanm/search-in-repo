@@ -5,7 +5,6 @@ import bean.PackageResult;
 import bean.VersionItem;
 import com.intellij.openapi.application.ApplicationManager;
 import core.Callback;
-import cucumber.api.java.cs.A;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
