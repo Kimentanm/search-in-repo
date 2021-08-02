@@ -27,7 +27,7 @@ intellij {
 
 patchPluginXml {
     sinceBuild '191.*'
-    untilBuild '*.*'
+    untilBuild null
 }
 
 tasks.withType(JavaCompile) {
