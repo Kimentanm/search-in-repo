@@ -9,6 +9,7 @@ import com.intellij.ui.table.JBTable;
 import core.Callback;
 import model.PackageTableModel;
 import model.VersionTableModel;
+import utils.ClipboardUtil;
 import utils.NotificationUtils;
 import utils.NpmDataUtil;
 
@@ -71,6 +72,23 @@ public class NpmWindow {
             }
         });
         handleDbClickPackageList();
+        handleDbClickVersionList();
+    }
+
+    private void handleDbClickVersionList() {
+        (new DoubleClickListener() {
+            @Override
+            protected boolean onDoubleClick(MouseEvent event) {
+                if (!versionTableLoading) {
+                    int selectedRow = versionTable.getSelectedRow();
+                    PackageItem packageItem = packageTableModel.getData().get(selectedRow);
+                    String commandText = "npm i -S " + packageItem.getPackageName() + "@" + packageItem.getLastVersion();
+                    ClipboardUtil.setClipboardString(commandText);
+                    NotificationUtils.infoNotify("Copy install command success.\n\n" + commandText, project);
+                }
+                return false;
+            }
+        }).installOn(versionTable);
     }
 
     private void handleDbClickPackageList() {
@@ -83,7 +101,7 @@ public class NpmWindow {
 //                    detailDialog.dispose();
                     int selectedRow = packageTable.getSelectedRow();
                     PackageItem packageItem = packageTableModel.getData().get(selectedRow);
-                    NpmDataUtil.searchVersionList(packageItem, new Callback<List<VersionItem>>() {
+                    NpmDataUtil.searchVersionList(packageItem, new Callback<>() {
                         @Override
                         public void onSuccess(List<VersionItem> list) {
                             versionTableModel.getDataVector().removeAllElements();
@@ -126,13 +144,13 @@ public class NpmWindow {
             String sortText = sortLabel[sortSelect.getSelectedIndex()];
             packageTableLoading = true;
             packageTable.setPaintBusy(true);
-            NpmDataUtil.searchPackageList(currentSearchText, pageValue, sortText, new Callback<PackageResult>() {
+            NpmDataUtil.searchPackageList(currentSearchText, pageValue, sortText, new Callback<>() {
 
                 @Override
                 public void onSuccess(PackageResult result) {
                     List<PackageItem> list = result.getData();
                     int totalPageValue = result.getTotalPage();
-                    totalPage.setText((int)Math.ceil(totalPageValue / 10) + 1 + "");
+                    totalPage.setText((int) Math.ceil(totalPageValue / 10) + 1 + "");
                     packageTableModel.getDataVector().removeAllElements();
                     versionTableModel.getDataVector().removeAllElements();
                     packageTableModel.setupTable(list);
