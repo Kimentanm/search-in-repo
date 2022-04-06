@@ -35,9 +35,9 @@ public class GroupTableModel extends DefaultTableModel {
         TableColumnModel columnModel = table.getColumnModel();
         columnModel.getColumn(0).setPreferredWidth(80);
         columnModel.getColumn(1).setPreferredWidth(200);
-        columnModel.getColumn(1).setPreferredWidth(200);
         columnModel.getColumn(2).setPreferredWidth(200);
-        columnModel.getColumn(3).setPreferredWidth(100);
+        columnModel.getColumn(3).setPreferredWidth(200);
+        columnModel.getColumn(4).setPreferredWidth(100);
         DefaultTableCellRenderer renderer =  new DefaultTableCellRenderer();
         renderer.setHorizontalAlignment(JTextField.CENTER);
         table.getColumn("Index").setCellRenderer(renderer);

@@ -20,7 +20,7 @@ Jetbrains插件，支持Jetbrains全系IDE。一款依赖查询工具，输入�
 - 使用Gradle的`buildPlugin`脚本构建  
 - 项目根路径找到build/distributions/search-in-repo-x.x.x.zip文件  
 - IDE中选择`Install plugin from disk`，选择上述zip文件
-- 下载zip文件 [search-in-repo-1.3.0.zip](https://upload.kimen.com.cn/#/s/OpS9)
+- 下载zip文件 [search-in-repo-1.3.2.zip](https://img.whalenas.com:283/file/search-in-repo-1.3.2.zip)
 
 ## 使用
  - 插件安装好，在IDE的右侧菜单栏会出现一个`Search`菜单  
@@ -37,6 +37,9 @@ Jetbrains插件，支持Jetbrains全系IDE。一款依赖查询工具，输入�
 ![](https://gitee.com/Kimentanm/image-store/raw/master/img/20210330140625.png)
 
 ## Change Notes
+- v1.3.2  
+  双击NPM依赖可复制install命令到剪贴板中
+  fix bugs
 - v1.3.0  
   新增Maven Repository Tab  
   fix bugs

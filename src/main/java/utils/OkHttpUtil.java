@@ -74,6 +74,18 @@ public class OkHttpUtil {
         return response.body().string();
     }
 
+    /**
+     *
+     * @param url 请求地址
+     * @return
+     * @throws IOException
+     */
+    public static Response sendGetResponse(String url) throws IOException {
+        Request.Builder builder = new Request.Builder().url(url);
+        Request request = builder.build();
+        return client.newCall(request).execute();
+    }
+
     public static String sendPut(String url, String json, Map<String,String> headers) throws IOException {
         RequestBody body = RequestBody.create(JSON, json);
         Request.Builder builder = new Request.Builder()

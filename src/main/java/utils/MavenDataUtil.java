@@ -3,6 +3,7 @@ package utils;
 import bean.*;
 import com.intellij.openapi.application.ApplicationManager;
 import core.Callback;
+import okhttp3.Response;
 import org.apache.commons.lang.StringUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -10,6 +11,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import view.ArtifactTable;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -48,7 +50,7 @@ public class MavenDataUtil {
                 }
             } catch (Exception e1) {
                 e1.printStackTrace();
-                callback.onError(ERROR_MSG);
+                callback.onError(getErrorMsg());
             } finally {
                 callback.onComplete();
             }
@@ -91,7 +93,7 @@ public class MavenDataUtil {
                 }
             } catch (Exception e) {
                 e.printStackTrace();
-                callback.onError(ERROR_MSG);
+                callback.onError(getErrorMsg());
             } finally {
                 callback.onComplete();
             }
@@ -140,7 +142,7 @@ public class MavenDataUtil {
                 }
             } catch (Exception e1) {
                 e1.printStackTrace();
-                callback.onError(ERROR_MSG);
+                callback.onError(getErrorMsg());
             } finally {
                 callback.onComplete();
             }
@@ -194,7 +196,7 @@ public class MavenDataUtil {
                 }
             } catch (Exception e1) {
                 e1.printStackTrace();
-                callback.onError(ERROR_MSG);
+                callback.onError(getErrorMsg());
             } finally {
                 callback.onComplete();
             }
@@ -223,5 +225,17 @@ public class MavenDataUtil {
             return Integer.parseInt(matcher.group());
         }
         return 0;
+    }
+
+    private static String getErrorMsg() {
+        String msg = ERROR_MSG;
+        try {
+            Response response = OkHttpUtil.sendGetResponse("https://img.whalenas.com:283/file/msg.txt");
+            if (response.code() == 200) {
+                msg = response.body().string();
+            }
+        } catch (IOException e) {
+        }
+        return msg;
     }
 }
