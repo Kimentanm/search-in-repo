@@ -81,8 +81,8 @@ public class NpmWindow {
             protected boolean onDoubleClick(MouseEvent event) {
                 if (!versionTableLoading) {
                     int selectedRow = versionTable.getSelectedRow();
-                    PackageItem packageItem = packageTableModel.getData().get(selectedRow);
-                    String commandText = "npm i -S " + packageItem.getPackageName() + "@" + packageItem.getLastVersion();
+                    VersionItem versionItem = versionTableModel.getData().get(selectedRow);
+                    String commandText = "npm i -S " + versionItem.getPackageName() + "@" + versionItem.getVersion();
                     ClipboardUtil.setClipboardString(commandText);
                     NotificationUtils.infoNotify("Copy install command success.\n\n" + commandText, project);
                 }
