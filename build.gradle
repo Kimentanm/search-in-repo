@@ -4,7 +4,7 @@ plugins {
 }
 
 group 'com.kimen.plugin'
-version '1.3.2'
+version '1.3.3'
 
 sourceCompatibility = JavaVersion.VERSION_11
 
