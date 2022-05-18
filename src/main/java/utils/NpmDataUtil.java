@@ -22,7 +22,7 @@ public class NpmDataUtil {
     public static void searchPackageList(String value, String currentPage, String sortText, Callback<PackageResult> callback) {
         ApplicationManager.getApplication().executeOnPooledThread(() -> {
             try {
-                String result = OkHttpUtil.sendGet(BASE_URL + "/search?q=" + value + "&page=" + currentPage + "&ranking=" + sortText);
+                String result = HttpUtil.sendGet(BASE_URL + "/search?q=" + value + "&page=" + currentPage + "&ranking=" + sortText);
                 Document document = Jsoup.parse(result);
                 Elements packageElements = document.getElementsByTag("section");
                 List<PackageItem> list = new ArrayList<>();
@@ -57,7 +57,7 @@ public class NpmDataUtil {
     public static void searchVersionList(PackageItem packageItem, Callback<List<VersionItem>> callback) {
         ApplicationManager.getApplication().executeOnPooledThread(() -> {
             try {
-                String result = OkHttpUtil.sendGet(BASE_URL + "/package/" + packageItem.getPackageName() + "?activeTab=versions");
+                String result = HttpUtil.sendGet(BASE_URL + "/package/" + packageItem.getPackageName() + "?activeTab=versions");
                 Document document = Jsoup.parse(result);
                 Element child = document.getElementById("tabpanel-versions").child(0);
                 Element versionElement = child.child(child.childNodeSize() - 1);

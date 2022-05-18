@@ -11,7 +11,6 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import view.ArtifactTable;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -31,7 +30,7 @@ public class MavenDataUtil {
         String groupId = groupItem.getGroupLabel();
         ApplicationManager.getApplication().executeOnPooledThread(() -> {
             try {
-                String result = OkHttpUtil.sendGet(BASE_URL + "/artifact/" + groupId + "/" + artifactId);
+                String result = HttpUtil.sendGet(BASE_URL + "/artifact/" + groupId + "/" + artifactId);
                 if (!result.contains("Cloudflare")) {
                     Document document = Jsoup.parse(result);
                     Element snippets = document.getElementById("snippets");
@@ -60,7 +59,7 @@ public class MavenDataUtil {
     public static void searchGroupList(String value, String currentPage, String sortText, Callback<GroupResult> callback) {
         ApplicationManager.getApplication().executeOnPooledThread(() -> {
             try {
-                String result = OkHttpUtil.sendGet(BASE_URL + "/search?q=" + value + "&p=" + currentPage + "&sort=" + sortText);
+                String result = HttpUtil.sendGet(BASE_URL + "/search?q=" + value + "&p=" + currentPage + "&sort=" + sortText);
                 // 如果返回了"On more step"认证信息，则提示用户过一会再试
                 if (!result.contains("Cloudflare")) {
                     Document document = Jsoup.parse(result);
@@ -107,7 +106,7 @@ public class MavenDataUtil {
         String groupId = groupItem.getGroupLabel();
         ApplicationManager.getApplication().executeOnPooledThread(() -> {
             try {
-                String result = OkHttpUtil.sendGet(BASE_URL + repositoryPath);
+                String result = HttpUtil.sendGet(BASE_URL + repositoryPath);
                 if (!result.contains("Cloudflare")) {
                     Document document = Jsoup.parse(result);
                     Element versionTable = document.getElementsByClass("grid versions").get(0);
@@ -161,7 +160,7 @@ public class MavenDataUtil {
     public static void searchArtifactDetail(ArtifactItem artifactItem, Callback<ArtifactDetail> callback) {
         ApplicationManager.getApplication().executeOnPooledThread(() -> {
             try {
-                String result = OkHttpUtil.sendGet(BASE_URL + "/artifact/" + artifactItem.getGroupId() + "/" + artifactItem.getArtifactId() + "/" + artifactItem.getVersion());
+                String result = HttpUtil.sendGet(BASE_URL + "/artifact/" + artifactItem.getGroupId() + "/" + artifactItem.getArtifactId() + "/" + artifactItem.getVersion());
                 if (!result.contains("Cloudflare")) {
                     Document document = Jsoup.parse(result);
                     Element table = document.getElementsByTag("table").get(0);
@@ -230,11 +229,8 @@ public class MavenDataUtil {
     private static String getErrorMsg() {
         String msg = ERROR_MSG;
         try {
-            Response response = OkHttpUtil.sendGetResponse("https://img.whalenas.com:283/file/msg.txt");
-            if (response.code() == 200) {
-                msg = response.body().string();
-            }
-        } catch (IOException e) {
+            msg = HttpUtil.sendGet("https://img.whalenas.com:283/file/msg.txt");
+        } catch (Exception e) {
         }
         return msg;
     }
