@@ -68,7 +68,8 @@ public class NpmDataUtil {
                     Elements a = versionItem.getElementsByTag("a");
                     if (a.size() > 0) {
                         String version = versionItem.getElementsByTag("a").get(0).text();
-                        String downloads = versionItem.getElementsByTag("code").get(0).text();
+                        String downloads = versionItem.getElementsByClass("downloads").get(0).text();
+//                        String downloads = versionItem.getElementsByTag("code").get(0).text();
                         downloads = downloads.replace(",", "");
                         String published = versionItem.getElementsByTag("ul").get(0).text();
                         VersionItem item = new VersionItem();

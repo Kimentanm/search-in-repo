@@ -50,7 +50,7 @@ public class MavenWindow {
 
     public MavenWindow(Project project) {
         this.project = project;
-        detailDialog = new DetailDialog();
+//        detailDialog = new DetailDialog();
         DefaultComboBoxModel model = new DefaultComboBoxModel(sortLabel);
         sortSelect.setModel(model);
         groupTableModel = new GroupTableModel(groupTable);

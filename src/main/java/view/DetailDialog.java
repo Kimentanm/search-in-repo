@@ -28,9 +28,9 @@ public class DetailDialog extends JDialog {
     private JButton copyGradle;
 
     public DetailDialog() {
-        setContentPane(contentPane);
-        setModal(true);
-        setTitle("Artifact Detail");
+//        setContentPane(contentPane);
+//        setModal(true);
+//        setTitle("Artifact Detail");
     }
 
     public void setData(ArtifactDetail detail) {

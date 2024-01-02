@@ -62,7 +62,10 @@
     <change-notes>
         <![CDATA[
         <ul>
-            <li>v1.3.2 <br>
+            <li>v1.3.4 <br>
+                Adapt the latest version
+            </li>
+            <li>v1.3.3 <br>
                 Fix bug about copying NPM command
             </li>
             <li>v1.3.2 <br>
