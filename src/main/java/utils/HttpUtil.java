@@ -22,7 +22,7 @@ public class HttpUtil {
      * @throws IOException
      */
     public static String sendGet(String url, Map<String,String> headers) throws IOException {
-        String msg = null;
+        String msg = "";
         HttpURLConnection httpURLConnection = null;
         URL requestUrl = new URL(url);
         try {

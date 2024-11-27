@@ -61,17 +61,16 @@ public class NpmDataUtil {
                 Document document = Jsoup.parse(result);
                 Element child = document.getElementById("tabpanel-versions").child(0);
                 Element versionElement = child.child(child.childNodeSize() - 1);
-                Elements versionList = versionElement.children();
+                Elements versionList = versionElement.getElementsByTag("tbody").get(0).getElementsByTag("tr");
                 List<VersionItem> list = new ArrayList<>();
                 for (int i = 1; i < versionList.size(); i++) {
                     Element versionItem = versionList.get(i);
-                    Elements a = versionItem.getElementsByTag("a");
-                    if (a.size() > 0) {
-                        String version = versionItem.getElementsByTag("a").get(0).text();
-                        String downloads = versionItem.getElementsByClass("downloads").get(0).text();
-//                        String downloads = versionItem.getElementsByTag("code").get(0).text();
+                    Elements children = versionItem.children();
+                    if (children.size() == 3) {
+                        String version = children.get(0).text();
+                        String downloads = children.get(1).text();
                         downloads = downloads.replace(",", "");
-                        String published = versionItem.getElementsByTag("ul").get(0).text();
+                        String published = children.get(2).text();
                         VersionItem item = new VersionItem();
                         item.setVersion(version);
                         item.setDownloads(Integer.parseInt(downloads));

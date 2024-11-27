@@ -35,7 +35,7 @@ public class MavenWindow {
     private JTabbedPane repositoryTab;
     private Project project;
     private GroupTableModel groupTableModel;
-    private DetailDialog detailDialog;
+//    private DetailDialog detailDialog;
 
     private final String[] sortLabel = {"relevance", "popular", "newest"};
 
@@ -106,13 +106,13 @@ public class MavenWindow {
                     MavenDataUtil.searchRepositoryList(groupItem, new Callback<List<RepositoryItem>>() {
                         @Override
                         public void onSuccess(List<RepositoryItem> data) {
-                            if (!CollectionUtils.isEmpty(data)) {
-                                data.forEach(repository -> {
-                                    ArtifactTable artifactTable = new ArtifactTable(groupItem, project, detailDialog, repository.getPath());
-                                    repositoryTab.addTab(repository.getTitle(), artifactTable);
-                                });
-                                repositoryTab.setSelectedIndex(0);
-                            }
+//                            if (!CollectionUtils.isEmpty(data)) {
+//                                data.forEach(repository -> {
+//                                    ArtifactTable artifactTable = new ArtifactTable(groupItem, project, detailDialog, repository.getPath());
+//                                    repositoryTab.addTab(repository.getTitle(), artifactTable);
+//                                });
+//                                repositoryTab.setSelectedIndex(0);
+//                            }
                         }
 
                         @Override
